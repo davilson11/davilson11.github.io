@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Davilson Henrique — Desenvolvedor & Estrategista | A Virada</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --green-dark: #0f1f18;
+      --green-mid: #1a3a2a;
+      --green-light: #2c5a45;
+      --gold: #d4af37;
+      --gold-glow: #e8c96a;
+      --cream: #f5f3f0;
+      --text-main: #ffffff;
+      --text-muted: #b0b8b3;
+      --border-color: rgba(212, 175, 55, 0.2);
+      --border-glow: rgba(212, 175, 55, 0.4);
+      --font-display: 'Instrument Serif', Georgia, serif;
+      --font-body: 'Inter', 'Helvetica Neue', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: linear-gradient(135deg, var(--green-dark) 0%, #0a1410 50%, var(--green-mid) 100%);
+      color: var(--text-main);
+      overflow-x: hidden;
+    }
+
+    /* ─── SCROLL BAR ─── */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--green-dark);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--gold);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--gold-glow);
+    }
+
+    /* ─── ANIMATED BACKGROUND ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(44, 90, 69, 0.05) 0%, transparent 50%);
+      animation: float 30s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(40px, -40px); }
+    }
+
+    /* ─── NAVBAR ─── */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 70px;
+      background: rgba(15, 31, 24, 0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      z-index: 1000;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .navbar-logo {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-style: italic;
+      color: var(--gold);
+      font-weight: 600;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .navbar-logo::before {
+      content: '⚡';
+      font-size: 20px;
+    }
+
+    .navbar-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .navbar-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .navbar-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      transition: width 0.3s ease;
+    }
+
+    .navbar-links a:hover {
+      color: var(--gold);
+    }
+
+    .navbar-links a:hover::after {
+      width: 100%;
+    }
+
+    /* ─── HERO SECTION ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 40px 60px;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      animation: heroFadeIn 1s ease-out;
+    }
+
+    @keyframes heroFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-label {
+      font-size: 13px;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: inline-block;
+      padding: 8px 16px;
+      border: 1px solid var(--border-color);
+      border-radius: 99px;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: 72px;
+      font-style: italic;
+      font-weight: 400;
+      margin: 24px 0;
+      line-height: 1.1;
+      letter-spacing: -1px;
+    }
+
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, var(--gold), var(--gold-glow));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 24px auto;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      font-family: var(--font-body);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold), var(--gold-glow));
+      color: var(--green-dark);
+      box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(212, 175, 55, 0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--gold);
+      border: 1.5px solid var(--border-glow);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(212, 175, 55, 0.1);
+      border-color: var(--gold);
+      transform: translateY(-4px);
+    }
+
+    /* ─── SCROLL INDICATOR ─── */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+    }
+
+    .scroll-indicator svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--gold);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(10px); }
+    }
+
+    /* ─── ABOUT SECTION ─── */
+    .about {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 100px 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-text h2 {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-style: italic;
+      margin-bottom: 24px;
+      line-height: 1.2;
+    }
+
+    .about-text h2 .accent {
+      color: var(--gold);
+    }
+
+    .about-text p {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .stat {
+      background: rgba(26, 58, 42, 0.3);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 24px;
+      backdrop-filter: blur(15px);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .stat:hover {
+      border-color: var(--border-glow);
+      background: rgba(26, 58, 42, 0.5);
+      transform: translateY(-8px);
+    }
+
+    .stat-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--gold);
+      font-family: 'Courier New', monospace;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 8px;
+    }
+
+    .about-image {
+      position: relative;
+      height: 400px;
+      background: linear-gradient(135deg, var(--green-light), var(--green-mid));
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 120px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .about-image::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* ─── PROJECTS SECTION ─── */
+    .projects {
+      min-height: 100vh;
+      padding: 100px 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .section-header h2 {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-style: italic;
+      margin-bottom: 16px;
+    }
+
+    .section-header p {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .projects-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+    }
+
+    .project-card {
+      background: rgba(26, 58, 42, 0.3);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 32px;
+      backdrop-filter: blur(15px);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .project-card:hover::before {
+      left: 100%;
+    }
+
+    .project-card:hover {
+      border-color: var(--border-glow);
+      background: rgba(26, 58, 42, 0.5);
+      transform: translateY(-12px);
+      box-shadow: 0 20px 60px rgba(212, 175, 55, 0.15);
+    }
+
+    .project-icon {
+      font-size: 48px;
+      width: 80px;
+      height: 80px;
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .project-card:hover .project-icon {
+      background: rgba(212, 175, 55, 0.2);
+      border-color: var(--border-glow);
+      transform: scale(1.1);
+    }
+
+    .project-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .project-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      flex-grow: 1;
+    }
+
+    .project-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-size: 11px;
+      padding: 6px 12px;
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid var(--border-color);
+      border-radius: 99px;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+
+    /* ─── TIMELINE SECTION ─── */
+    .timeline {
+      min-height: 100vh;
+      padding: 100px 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .timeline-container {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .timeline-container::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(180deg, transparent, var(--gold), transparent);
+    }
+
+    .timeline-item {
+      margin-bottom: 50px;
+      position: relative;
+      opacity: 0;
+      animation: timelineReveal 0.8s ease-out forwards;
+    }
+
+    @keyframes timelineReveal {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+    .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+    .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+    .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+
+    .timeline-item:nth-child(odd) {
+      text-align: right;
+      padding-right: 52%;
+    }
+
+    .timeline-item:nth-child(even) {
+      text-align: left;
+      padding-left: 52%;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 16px;
+      background: var(--gold);
+      border: 3px solid var(--green-dark);
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+    }
+
+    .timeline-content {
+      background: rgba(26, 58, 42, 0.3);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      backdrop-filter: blur(15px);
+      transition: all 0.3s ease;
+    }
+
+    .timeline-item:hover .timeline-content {
+      border-color: var(--border-glow);
+      background: rgba(26, 58, 42, 0.5);
+    }
+
+    .timeline-year {
+      font-size: 14px;
+      color: var(--gold);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .timeline-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    .timeline-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    /* ─── CTA SECTION ─── */
+    .cta {
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 40px;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .cta-content {
+      max-width: 700px;
+    }
+
+    .cta h2 {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-style: italic;
+      margin-bottom: 24px;
+    }
+
+    .cta p {
+      font-size: 16px;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      line-height: 1.8;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: rgba(15, 31, 24, 0.5);
+      border-top: 1px solid var(--border-color);
+      padding: 40px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    footer p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    footer a:hover {
+      color: var(--gold-glow);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 0 20px;
+      }
+
+      .navbar-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 100px 20px 60px;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .about-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .timeline-container::before {
+        left: 20px;
+      }
+
+      .timeline-item:nth-child(odd),
+      .timeline-item:nth-child(even) {
+        text-align: left;
+        padding-left: 60px;
+      }
+
+      .timeline-dot {
+        left: 10px;
+      }
+
+      .section-header h2 {
+        font-size: 36px;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="navbar-logo">A Virada</div>
+  <ul class="navbar-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#projetos">Projetos</a></li>
+    <li><a href="#timeline">Trajetória</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-label">Bem-vindo ao meu universo</div>
+    <h1>Olá, sou <span class="highlight">Davilson Henrique</span></h1>
+    <p>Desenvolvedor Web & Criador de Ferramentas Estratégicas Pessoais. Transformo ideias em soluções tecnológicas que impactam vidas e negócios.</p>
+    <div class="hero-cta">
+      <a href="#projetos" class="btn btn-primary">Explorar Projetos</a>
+      <a href="#contato" class="btn btn-secondary">Entrar em Contato</a>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  </div>
+</section>
+
+<!-- ABOUT SECTION -->
+<section class="about" id="sobre">
+  <div class="about-container">
+    <div class="about-text">
+      <h2>Sobre o <span class="accent">Estrategista</span></h2>
+      <p>Com mais de 3 anos de experiência em desenvolvimento web, descobri uma paixão por criar ferramentas que ajudam pessoas a estruturar suas vidas e negócios de forma estratégica.</p>
+      <p>Meu projeto "A Virada" nasceu dessa visão: combinar tecnologia de ponta com metodologias comprovadas de planejamento pessoal, criando uma plataforma que transforma intenções em ações concretas.</p>
+      <p>Acredito que a tecnologia deve ser elegante, intuitiva e, acima de tudo, útil. Cada projeto que desenvolvo carrega essa filosofia.</p>
+      
+      <div class="about-stats">
+        <div class="stat">
+          <div class="stat-value">5+</div>
+          <div class="stat-label">Projetos</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">3+</div>
+          <div class="stat-label">Anos de Exp.</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">100%</div>
+          <div class="stat-label">Dedicação</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">∞</div>
+          <div class="stat-label">Aprendizado</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-image">
+      👨‍💻
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS SECTION -->
+<section class="projects" id="projetos">
+  <div class="section-header">
+    <h2>Projetos em Destaque</h2>
+    <p>Conheça as ferramentas que estou desenvolvendo para transformar a forma como você planeja sua vida e negócio.</p>
+  </div>
+
+  <div class="projects-grid">
+    <!-- A Virada SWOT -->
+    <div class="project-card">
+      <div class="project-icon">🎯</div>
+      <div class="project-title">A Virada SWOT</div>
+      <div class="project-desc">Análise estratégica pessoal completa. Identifique suas forças, fraquezas, oportunidades e ameaças, transformando-as em estratégias de ação.</div>
+      <div class="project-tags">
+        <span class="tag">Estratégia</span>
+        <span class="tag">Pessoal</span>
+        <span class="tag">Análise</span>
+      </div>
+    </div>
+
+    <!-- Rotina Ideal -->
+    <div class="project-card">
+      <div class="project-icon">⏰</div>
+      <div class="project-title">Rotina Ideal</div>
+      <div class="project-desc">Estruture sua rotina perfeita com blocos de tempo otimizados. Combine rituais matinais, blocos de energia e rotinas noturnas para máxima produtividade.</div>
+      <div class="project-tags">
+        <span class="tag">Produtividade</span>
+        <span class="tag">Rotina</span>
+        <span class="tag">Tempo</span>
+      </div>
+    </div>
+
+    <!-- Sprint de Aprendizado -->
+    <div class="project-card">
+      <div class="project-icon">📚</div>
+      <div class="project-title">Sprint de Aprendizado</div>
+      <div class="project-desc">Domine qualquer habilidade em 30 dias com um sistema estruturado de recursos, projetos práticos e rastreamento diário de progresso.</div>
+      <div class="project-tags">
+        <span class="tag">Aprendizado</span>
+        <span class="tag">30 Dias</span>
+        <span class="tag">Tracker</span>
+      </div>
+    </div>
+
+    <!-- Desenvolvimento Web -->
+    <div class="project-card">
+      <div class="project-icon">💻</div>
+      <div class="project-title">Soluções Web</div>
+      <div class="project-desc">Desenvolvimento de aplicações web modernas, responsivas e de alto desempenho. Do design ao deployment, entrego qualidade em cada pixel.</div>
+      <div class="project-tags">
+        <span class="tag">Web</span>
+        <span class="tag">React</span>
+        <span class="tag">Full-Stack</span>
+      </div>
+    </div>
+
+    <!-- Consultoria Estratégica -->
+    <div class="project-card">
+      <div class="project-icon">🚀</div>
+      <div class="project-title">Consultoria Estratégica</div>
+      <div class="project-desc">Ajudo empreendedores e profissionais a estruturar suas estratégias pessoais e de negócio com ferramentas e metodologias comprovadas.</div>
+      <div class="project-tags">
+        <span class="tag">Consultoria</span>
+        <span class="tag">Estratégia</span>
+        <span class="tag">Negócio</span>
+      </div>
+    </div>
+
+    <!-- Mentoria -->
+    <div class="project-card">
+      <div class="project-icon">🎓</div>
+      <div class="project-title">Mentoria em Tech</div>
+      <div class="project-desc">Mentoria para desenvolvedores em início de carreira. Compartilho conhecimento, experiências e as melhores práticas do mercado.</div>
+      <div class="project-tags">
+        <span class="tag">Mentoria</span>
+        <span class="tag">Educação</span>
+        <span class="tag">Tech</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE SECTION -->
+<section class="timeline" id="timeline">
+  <div class="section-header">
+    <h2>Minha Trajetória</h2>
+    <p>Uma jornada de aprendizado, crescimento e transformação através da tecnologia e estratégia.</p>
+  </div>
+
+  <div class="timeline-container">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-year">2021</div>
+        <div class="timeline-title">Início na Programação</div>
+        <div class="timeline-desc">Comecei minha jornada no desenvolvimento web, aprendendo HTML, CSS e JavaScript.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-year">2022</div>
+        <div class="timeline-title">Especialização em React</div>
+        <div class="timeline-desc">Aprofundei conhecimentos em React e comecei a trabalhar em projetos mais complexos.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-year">2023</div>
+        <div class="timeline-title">Criação de A Virada</div>
+        <div class="timeline-desc">Lancei a plataforma "A Virada", combinando tecnologia com estratégia pessoal.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-year">2024+</div>
+        <div class="timeline-title">Expansão e Impacto</div>
+        <div class="timeline-desc">Expandindo A Virada com novas ferramentas e ajudando mais pessoas a transformar suas vidas.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta" id="contato">
+  <div class="cta-content">
+    <h2>Vamos Transformar Ideias em Realidade?</h2>
+    <p>Seja para um projeto web, consultoria estratégica ou apenas para conversar sobre tecnologia e inovação, estou aqui para ajudar.</p>
+    <div class="cta-buttons">
+      <a href="https://www.linkedin.com/in/davilson-henrique-ad%C3%A3o-2a71aa19b/" target="_blank" class="btn btn-primary">
+        <i class="fab fa-linkedin"></i> LinkedIn
+      </a>
+      <a href="https://github.com/davilson11" target="_blank" class="btn btn-primary">
+        <i class="fab fa-github"></i> GitHub
+      </a>
+      <a href="https://www.instagram.com/davilsonhenrique/" target="_blank" class="btn btn-secondary">
+        <i class="fab fa-instagram"></i> Instagram
+      </a>
+      <a href="https://wa.me/5519989253475" target="_blank" class="btn btn-secondary">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2024 Davilson Henrique. Feito com ⚡ e dedicação. Powered by <a href="#">A Virada</a></p>
+</footer>
+
+<script>
+  // Smooth scroll para links de navegação
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Animação de reveal ao fazer scroll
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+  };
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    card.style.transition = 'all 0.6s ease';
+    observer.observe(card);
+  });
+</script>
+
+</body>
+</html>
